@@ -1,0 +1,44 @@
+[
+  {
+    "name": "All Sports Bar",
+    "address": "70 Fbg de France, 90000 Belfort",
+    "latitude": 47.635176,
+    "longitude": 6.853571,
+    "image_url": "https://lh3.googleusercontent.com/p/AF1QipPitOlRzwVscIPJDVDnUK8Uadg2s972105cBeGT=s680-w680-h510"
+  },
+  {
+    "name": "Shelby's bar",
+    "address": "6 Pl. de l'Étuve, 90000 Belfort",
+    "latitude": 47.637644,
+    "longitude": 6.8642628,
+    "image_url": "https://lh3.googleusercontent.com/p/AF1QipPUSo6i3L-ATWv8GIK2Kt3OFiUXTtOAjRA_CDu1=s680-w680-h510"
+  },
+  {
+    "name": "Mandala - Café & bar",
+    "address": "6 Grande Rue, 90000 Belfort",
+    "latitude": 47.7436187,
+    "longitude": 6.8247402,
+    "image_url": "https://lh3.googleusercontent.com/p/AF1QipOc0Rgaklb6RqPDgYNFRHVC_YhgSlz6Fuy1rKQ2=s680-w680-h510"
+  },
+  {
+    "name": "LE VIEUX GARAGE CAFE",
+    "address": "7 Rue Michelet, 90000 Belfort",
+    "latitude": 47.6355888,
+    "longitude": 6.8533083,
+    "image_url": "https://lh3.googleusercontent.com/p/AF1QipMxaHdzvVnfgcDTTdt3QGUr20T3I5e5I7SxxlwO=s680-w680-h510"
+  },
+  {
+    "name": "La Baraque Rock",
+    "address": "4 Grande Rue, 90000 Belfort",
+    "latitude": 47.5796812,
+    "longitude": 6.8550875,
+    "image_url": "https://lh3.googleusercontent.com/p/AF1QipOQEr6ZHyXigrT798AwGjFLzRWHDzXzvO9iYuEb=s680-w680-h510"
+  },
+  {
+    "name": "Le Fut Perdu",
+    "address": "22 Quai Charles Vallet, 90000 Belfort",
+    "latitude": 47.6409821,
+    "longitude": 6.8588208,
+    "image_url": "https://lh3.googleusercontent.com/p/AF1QipNLh2p-Mp0N78Qhy6Yxgc-D6LPwG6-N40GwEFQJ=s680-w680-h510"
+  }
+]
