@@ -59,6 +59,17 @@ app.delete('/users/:id', async (req, res) => {
   }
 });
 
+// Supprimer tous les utilisateurs
+app.delete('/users', async (req, res) => {
+  try {
+      await prisma.user.deleteMany();
+      res.send(`All users are deleted`);
+  } catch (e) {
+      console.error(e.message);
+      res.status(500).send("Can't delete all users");
+  }
+});
+
 
 // Modifier partiellement un utilisateur par ID
 app.patch('/users/:id', async (req, res) => {
