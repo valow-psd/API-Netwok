@@ -237,6 +237,31 @@ app.get('/restaurants/:id/users', async (req, res) => {
 });
 
 
+//Compter le nombre d'utilisateurs dans un restaurant
+app.get('/restaurants/:id/userCount', async (req, res) => {
+    try {
+        const restaurantId = parseInt(req.params.id);
+
+        // Trouver le restaurant avec l'ID fourni
+        const restaurant = await prisma.restaurant.findUnique({
+            where: { id: restaurantId },
+            include: { users: true } // Inclure les utilisateurs liés
+        });
+
+        if (!restaurant) {
+            return res.status(404).send("Restaurant not found");
+        }
+
+        // Compter le nombre d'utilisateurs dans le restaurant
+        const userCount = restaurant.users.length;
+        res.json({ userCount });
+    } catch (e) {
+        console.error(e.message);
+        res.status(500).send("Error retrieving user count");
+    }
+});
+
+
 
 // Démarrer le serveur
 const PORT = 3000;
