@@ -227,6 +227,28 @@ app.patch('/restaurants/:id/exit', async (req, res) => {
   }
 });
 
+// Obtenir tous les utilisateurs d'un restaurant spécifique
+app.get('/restaurants/:id/users', async (req, res) => {
+  try {
+      const restaurantId = parseInt(req.params.id);
+
+      const restaurant = await prisma.restaurant.findUnique({
+          where: { id: restaurantId },
+          include: { users: true } // Assurez-vous d'inclure les utilisateurs
+      });
+
+      if (!restaurant) {
+          return res.status(404).send("Restaurant not found");
+      }
+
+      res.json(restaurant.users);
+  } catch (e) {
+      console.error(e.message);
+      res.status(500).send("Error retrieving users from the restaurant");
+  }
+});
+
+
 
 // Démarrer le serveur
 const PORT = 3000;
