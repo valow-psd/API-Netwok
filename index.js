@@ -161,71 +161,59 @@ app.patch('/restaurants/:id', async (req, res) => {
 
 //User entre dans un resto
 app.patch('/restaurants/:id/enter', async (req, res) => {
-  const userId = parseInt(req.body.userId);
-  const restaurantId = parseInt(req.params.id);
+    const userId = parseInt(req.body.userId);
+    const restaurantId = parseInt(req.params.id);
 
-  try {
-      // Récupérer le restaurant par son ID
-      let restaurant = await prisma.restaurant.findUnique({
-          where: { id: restaurantId },
-          include: { users: true }
-      });
+    try {
+        const restaurant = await prisma.restaurant.findUnique({ where: { id: restaurantId } });
+        if (!restaurant) return res.status(404).send("Restaurant not found");
 
-      if (!restaurant) {
-          return res.status(404).send("Restaurant not found");
-      }
+        await prisma.user.update({
+            where: { id: userId },
+            data: { is_enter: true, restaurantId: restaurantId }
+        });
 
-      // Ajouter l'utilisateur à la liste des utilisateurs du restaurant
-      await prisma.restaurant.update({
-          where: { id: restaurantId },
-          data: {
-              users: {
-                  connect: { id: userId }
-              }
-          }
-      });
+        await prisma.restaurant.update({
+            where: { id: restaurantId },
+            data: { users: { connect: { id: userId } } }
+        });
 
-      res.status(200).send(`User ${userId} entered restaurant ${restaurantId}`);
-  } catch (e) {
-      console.error(e.message);
-      res.status(500).send("Error in isEnter");
-  }
+        res.status(200).send(`User ${userId} entered restaurant ${restaurantId}`);
+    } catch (e) {
+        console.error(e.message);
+        res.status(500).send("Error in entering the restaurant");
+    }
 });
+
 
 
 
 // user part d'un resto
 app.patch('/restaurants/:id/exit', async (req, res) => {
-  const userId = parseInt(req.body.userId);
-  const restaurantId = parseInt(req.params.id);
+    const userId = parseInt(req.body.userId);
+    const restaurantId = parseInt(req.params.id);
 
-  try {
-      // Récupérer le restaurant par son ID
-      let restaurant = await prisma.restaurant.findUnique({
-          where: { id: restaurantId },
-          include: { users: true }
-      });
+    try {
+        const restaurant = await prisma.restaurant.findUnique({ where: { id: restaurantId } });
+        if (!restaurant) return res.status(404).send("Restaurant not found");
 
-      if (!restaurant) {
-          return res.status(404).send("Restaurant not found");
-      }
+        await prisma.user.update({
+            where: { id: userId },
+            data: { is_enter: false, restaurantId: null }
+        });
 
-      // Retirer l'utilisateur de la liste des utilisateurs du restaurant
-      await prisma.restaurant.update({
-          where: { id: restaurantId },
-          data: {
-              users: {
-                  disconnect: { id: userId }
-              }
-          }
-      });
+        await prisma.restaurant.update({
+            where: { id: restaurantId },
+            data: { users: { disconnect: { id: userId } } }
+        });
 
-      res.status(200).send(`User ${userId} exited restaurant ${restaurantId}`);
-  } catch (e) {
-      console.error(e.message);
-      res.status(500).send("Error in isExit");
-  }
+        res.status(200).send(`User ${userId} exited restaurant ${restaurantId}`);
+    } catch (e) {
+        console.error(e.message);
+        res.status(500).send("Error in exiting the restaurant");
+    }
 });
+
 
 // Obtenir tous les utilisateurs d'un restaurant spécifique
 app.get('/restaurants/:id/users', async (req, res) => {
